@@ -1,3 +1,4 @@
+import 'package:draw/utils/cuctom_paint.dart';
 import 'package:flutter/material.dart';
 
 class CanvasWidget extends StatefulWidget {
@@ -8,6 +9,24 @@ class CanvasWidget extends StatefulWidget {
 }
 
 class _CanvasWidgetState extends State<CanvasWidget> {
+
+  void onPanStart(DragStartDetails details) {
+  print('User started drawing');
+  final box = context.findRenderObject() as RenderBox;
+  final point = box.globalToLocal(details.globalPosition);
+  print(point);
+}
+
+void onPanUpdate(DragUpdateDetails details) {
+  final box = context.findRenderObject() as RenderBox;
+  final point = box.globalToLocal(details.globalPosition);
+  print(point);
+}
+
+void onPanEnd(DragEndDetails details) {
+  print('User ended drawing');
+}
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +36,14 @@ class _CanvasWidgetState extends State<CanvasWidget> {
         color: Colors.blue,
         borderRadius: BorderRadius.all(Radius.circular(20))
       ),
-      child: GestureDetector(),
+      child: GestureDetector(
+        onPanStart: onPanStart,
+        onPanUpdate: onPanUpdate,
+        onPanEnd: onPanEnd,
+        child: CustomPaint(
+          painter: MyCustomPainter(),
+        ),
+      ),
     );
   }
 }
