@@ -13,7 +13,11 @@ class _CanvasWidgetState extends State<CanvasWidget> {
     return Container(
       width: MediaQuery.of(context).size.width *0.98,
       height: MediaQuery.of(context).size.height *0.96,
-      color: Colors.blue,
+      decoration: const BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
+      child: GestureDetector(),
     );
   }
 }
