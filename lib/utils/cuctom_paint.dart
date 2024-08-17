@@ -14,7 +14,9 @@ class MyCustomPainter extends CustomPainter {
     canvas.drawLine(startPoint, endPoint, paint);
   }
 
-
+  void draw(List<Offset> points, Color color){
+    
+  }
   // 4
   @override
   bool shouldRepaint(MyCustomPainter delegate) {
