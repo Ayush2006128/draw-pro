@@ -1,4 +1,5 @@
 import 'package:draw/utils/cuctom_paint.dart';
+import 'package:draw/utils/line.dart';
 import 'package:flutter/material.dart';
 
 class CanvasWidget extends StatefulWidget {
@@ -9,22 +10,19 @@ class CanvasWidget extends StatefulWidget {
 }
 
 class _CanvasWidgetState extends State<CanvasWidget> {
+  late List<DrawLine> line;
 
   void onPanStart(DragStartDetails details) {
-  print('User started drawing');
   final box = context.findRenderObject() as RenderBox;
   final point = box.globalToLocal(details.globalPosition);
-  print(point);
 }
 
 void onPanUpdate(DragUpdateDetails details) {
   final box = context.findRenderObject() as RenderBox;
   final point = box.globalToLocal(details.globalPosition);
-  print(point);
 }
 
 void onPanEnd(DragEndDetails details) {
-  print('User ended drawing');
 }
 
   @override
@@ -41,7 +39,7 @@ void onPanEnd(DragEndDetails details) {
         onPanUpdate: onPanUpdate,
         onPanEnd: onPanEnd,
         child: CustomPaint(
-          painter: MyCustomPainter(),
+          painter: MyCustomPainter(lines: line),
         ),
       ),
     );
